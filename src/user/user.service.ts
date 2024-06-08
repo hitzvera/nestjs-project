@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
-export class UserService {}
+export class UserService {
+  getUser() {
+    return 'user';
+  }
+}
