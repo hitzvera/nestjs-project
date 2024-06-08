@@ -1,6 +1,14 @@
-import { Controller, Get, Param, Query, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Query,
+  UsePipes,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UppercasePipe } from 'src/pipes/uppercase/uppercase.pipe';
+import { UUID } from 'crypto';
 
 @Controller('user')
 export class UserController {
@@ -10,5 +18,10 @@ export class UserController {
   @Get()
   getUsers(@Query('name') name: string) {
     return name;
+  }
+
+  @Get(':id')
+  getUserById(@Param('id', ParseUUIDPipe) id: UUID) {
+    return this.userService.getUserById(id);
   }
 }
